@@ -1,0 +1,5 @@
+package com.moyck.recoder251.ui
+
+class MainPresenter {
+
+}
