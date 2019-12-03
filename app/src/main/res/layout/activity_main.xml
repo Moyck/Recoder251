@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:translationZ="10dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_home"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:padding="15dp"
+                android:src="@drawable/house" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/img_home"
+                android:layout_toStartOf="@id/tv_"
+                android:background="@drawable/search_bg"
+                android:minHeight="40dp">
+
+                <ImageView
+                    android:id="@+id/img_locak"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/lock" />
+
+                <EditText
+                    android:id="@+id/et_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/img_locak"
+                    android:background="@color/gray"
+                    android:lines="1"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:text="http://www.moyck.com"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/img_more"
+                android:id="@+id/tv_"
+                android:text="1"
+                android:textColor="@color/hint_gray"
+                android:textSize="12dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@drawable/radius_bg" />
+
+            <ImageView
+                android:tint="@color/hint_gray"
+                android:layout_centerVertical="true"
+                android:id="@+id/img_more"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/more"
+                android:padding="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+
+
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
