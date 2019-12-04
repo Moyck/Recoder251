@@ -1,5 +1,7 @@
 package com.moyck.recoder251.ui.main
 
+import android.Manifest
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.view.KeyEvent
@@ -15,8 +17,16 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import com.moyck.recoder251.R
 import com.moyck.recoder251.base.BaseActivity
+import com.moyck.recoder251.ui.recoder.RecoderActivity
 import com.moyck.recoder251.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.core.app.ActivityCompat
+import android.content.pm.PackageManager
+import android.Manifest.permission
+import android.Manifest.permission.*
+import android.app.Activity
+import androidx.core.app.ComponentActivity.ExtraData
+
 
 class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
     TextView.OnEditorActionListener {
@@ -95,6 +105,9 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
     }
 
     fun startRecoder() {
+        if (!checkPermission()) {
+            return
+        }
         if (presenter.isRecording) {
             presenter.stopRecoder()
             imgStart?.setColorFilter(Color.TRANSPARENT)
@@ -118,7 +131,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
     }
 
     fun toRecoderList() {
-
+        startActivity(Intent(this, RecoderActivity::class.java))
     }
 
     fun showMorePop() {
@@ -137,7 +150,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
         view.findViewById<TextView>(R.id.item_tv10).setOnClickListener(this)
         view.findViewById<TextView>(R.id.item_tv_help).setOnClickListener(this)
         imgStart = view.findViewById<ImageView>(R.id.img_start)
-        imgDownload = view.findViewById<ImageView>(R.id.img_download)
+        imgDownload = view.findViewById<ImageView>(com.moyck.recoder251.R.id.img_download)
 
         popupWindow = PopupWindow(
             view,
@@ -147,6 +160,36 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
         popupWindow!!.isOutsideTouchable = true
         popupWindow!!.setBackgroundDrawable(BitmapDrawable())
         popupWindow!!.showAsDropDown(img_more, -50, -100)
+    }
+
+    private fun checkPermission(): Boolean {
+        val REQUEST_EXTERNAL_STORAGE = 1
+        val PERMISSIONS_STORAGE = arrayOf<String>(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.RECORD_AUDIO
+        )
+        try {
+            //检测是否有写的权限
+            val permission = ActivityCompat.checkSelfPermission(
+                this,
+                "android.permission.WRITE_EXTERNAL_STORAGE"
+            )
+            val permission2 =
+                ActivityCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO")
+            if (permission != PackageManager.PERMISSION_GRANTED || permission2 != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                    this,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+                )
+                return false
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return true
     }
 
     override fun onBackPressed() {

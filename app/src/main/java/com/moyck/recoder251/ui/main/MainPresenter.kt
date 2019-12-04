@@ -51,8 +51,10 @@ class MainPresenter {
         }
         try {
             val fileName = dateFormat.format(Date()) + ".m4a"
-            val filePath = view.getContext().filesDir.path + fileName
-            mMediaRecorder?.setOutputFile(filePath)
+            val filePath = view.getContext().getExternalFilesDir("")
+            filePath?.mkdirs()
+            mMediaRecorder?.setOutputFile(filePath?.path + fileName)
+            Log.e("MainPresenter",""+filePath?.path + fileName)
             mMediaRecorder?.prepare()
             mMediaRecorder?.start()
             isRecording = true
