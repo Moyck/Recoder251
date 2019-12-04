@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/lin_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/lin_"
-    tools:context=".ui.MainActivity">
+    android:orientation="vertical"
+    tools:context=".ui.main.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -33,8 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/img_home"
                 android:layout_toStartOf="@id/tv_"
+                android:layout_toEndOf="@id/img_home"
                 android:background="@drawable/search_bg"
                 android:minHeight="40dp">
 
@@ -48,6 +48,9 @@
                     android:src="@drawable/lock" />
 
                 <EditText
+                    android:inputType="text"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
                     android:id="@+id/et_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,37 +66,100 @@
             </RelativeLayout>
 
             <TextView
-                android:layout_marginStart="13dp"
-                android:layout_marginEnd="10dp"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/img_more"
                 android:id="@+id/tv_"
-                android:text="1"
-                android:textColor="@color/hint_gray"
-                android:textSize="12dp"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:background="@drawable/radius_bg" />
+                android:layout_centerVertical="true"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@id/img_more"
+                android:background="@drawable/radius_bg"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/hint_gray"
+                android:textSize="12dp" />
 
             <ImageView
-                android:tint="@color/hint_gray"
-                android:layout_centerVertical="true"
                 android:id="@+id/img_more"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/more"
-                android:padding="5dp"
                 android:layout_width="30dp"
-                android:layout_height="30dp"/>
-
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:src="@drawable/more"
+                android:tint="@color/hint_gray" />
 
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <WebView
-        android:id="@+id/webview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/re_"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff">
+
+            <ImageView
+                android:id="@+id/img_error404"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/error404" />
+
+            <TextView
+                android:textColor="@color/hint_gray"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/img_error404"
+                android:text="你发的帖子已经404"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/re_help"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff">
+
+            <ImageView
+                android:id="@+id/img_doge"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/doge" />
+
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:gravity="center"
+                android:textColor="@color/hint_gray"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/img_doge"
+                android:text="@string/tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

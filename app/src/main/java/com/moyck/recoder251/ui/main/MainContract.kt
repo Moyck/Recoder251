@@ -1,4 +1,4 @@
-package com.moyck.recoder251.ui
+package com.moyck.recoder251.ui.main
 
 import com.moyck.recoder251.base.IModel
 import com.moyck.recoder251.base.IView

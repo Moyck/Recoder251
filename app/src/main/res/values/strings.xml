@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Recoder251</string>
+
+    <string name="tip">用户有权利，也有义务，并基于事实对于涉嫌影响APP运行的BUG，漏洞向我提出。我尊重所有用户的决定。如果用户认为该App无法正常运行，我支持用户向我提出疑问。这样也体现开源世界人人奉献的开源精神。(doge)</string>
+
+
 </resources>

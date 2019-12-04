@@ -3,118 +3,189 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:elevation="5dp"
+    android:orientation="vertical"
     android:padding="10dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="5dp"
         android:id="@+id/cardview"
         android:layout_width="260dp"
-        android:translationZ="6dp"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
         android:layout_marginTop="20dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="2dp"
-        app:cardBackgroundColor="#ffffff">
+        android:translationZ="6dp"
+        app:cardBackgroundColor="#ffffff"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-
-
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:weightSum="5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="打开新的标签页" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/in" />
+
+                <ImageView
+                    android:id="@+id/img_start"
+                    android:padding="5dp"
+                    android:tint="@color/hint_gray"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/start" />
+
+                <ImageView
+                    android:id="@+id/img_download"
+                    android:padding="5dp"
+                    android:tint="@color/hint_gray"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/download" />
+
+                <ImageView
+                    android:tint="@color/hint_gray"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:padding="5dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/info" />
+
+                <ImageView
+                    android:padding="5dp"
+                    android:tint="@color/hint_gray"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/refresh" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="打开新的无痕式标签页" />
-
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="书签" />
-
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="最近打开的标签页" />
-
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="历史记录" />
-
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="下载内容" />
+                android:orientation="vertical">
 
 
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="翻译..." />
+                <TextView
+                    android:id="@+id/item_tv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="打开新的标签页"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/item_tv2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="打开新的无痕式标签页"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/item_tv3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="书签"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/item_tv4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="最近打开的标签页"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/item_tv5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="历史记录"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/item_tv6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="下载内容"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
 
 
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="分享..." />
+                <TextView
+                    android:id="@+id/item_tv7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="翻译..."
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
 
 
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="在网页中查找" />
+                <TextView
+                    android:id="@+id/item_tv8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="分享..."
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
 
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="设置" />
 
-            <TextView
-                android:padding="10dp"
-                android:textSize="17sp"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="帮助与反馈" />
+                <TextView
+                    android:id="@+id/item_tv9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="在网页中查找"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/item_tv10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="设置"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/item_tv_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="帮助与反馈"
+                    android:textColor="@color/black"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
