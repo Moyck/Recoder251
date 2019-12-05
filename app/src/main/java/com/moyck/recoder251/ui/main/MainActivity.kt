@@ -25,11 +25,14 @@ import android.content.pm.PackageManager
 import android.Manifest.permission
 import android.Manifest.permission.*
 import android.app.Activity
+import android.os.Build
 import androidx.core.app.ComponentActivity.ExtraData
+import com.moyck.recoder251.service.RecorderService
 
 
 class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
     TextView.OnEditorActionListener {
+
 
     var popupWindow: PopupWindow? = null
     private val presenter = MainPresenter()
@@ -134,6 +137,10 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
         startActivity(Intent(this, RecoderActivity::class.java))
     }
 
+    override fun flash(isLight: Boolean) {
+        tv_.setTextColor(if (isLight) Color.GREEN else resources.getColor(R.color.hint_gray))
+    }
+
     fun showMorePop() {
         val view = LayoutInflater.from(this).inflate(R.layout.pop_more, null)
         view.findViewById<ImageView>(R.id.img_start).setOnClickListener(this)
@@ -151,7 +158,9 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
         view.findViewById<TextView>(R.id.item_tv_help).setOnClickListener(this)
         imgStart = view.findViewById<ImageView>(R.id.img_start)
         imgDownload = view.findViewById<ImageView>(com.moyck.recoder251.R.id.img_download)
-
+        if (presenter.isRecording) {
+            imgStart?.setColorFilter(Color.GREEN)
+        }
         popupWindow = PopupWindow(
             view,
             ViewGroup.LayoutParams.WRAP_CONTENT,

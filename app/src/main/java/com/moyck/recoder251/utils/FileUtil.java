@@ -2,10 +2,14 @@ package com.moyck.recoder251.utils;
 
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static android.os.Environment.DIRECTORY_PICTURES;
 
@@ -25,5 +29,19 @@ public class FileUtil {
         fos.close();
     }
 
+    /**
+     * 获取目录下所有文件
+     *
+     * @param path 指定目录路径
+     * @return
+     */
+    public static List<File> getFilesAllFile(String path) {
+        File file = new File(path);
+        File[] files = file.listFiles();
+        if (files == null) {
+            return new ArrayList<>();
+        }
+        return Arrays.asList(files);
+    }
 
 }

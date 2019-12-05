@@ -1,13 +1,16 @@
 package com.moyck.recoder251.ui.main
 
+import android.content.Intent
 import android.media.MediaRecorder
+import android.os.Build
 import android.util.Log
+import com.moyck.recoder251.service.RecorderService
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class MainPresenter {
+class MainPresenter : MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListener {
 
     var mMediaRecorder: MediaRecorder? = null
     var dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH)
@@ -16,52 +19,54 @@ class MainPresenter {
     var isRecording = false
 
 
-
-    fun bind(view: MainContract.View, model: MainContract.Model){
+    fun bind(view: MainContract.View, model: MainContract.Model) {
         this.view = view
         this.model = model
     }
 
-    fun stopRecoder(){
-        if (!isRecording){
+    fun stopRecoder() {
+        if (!isRecording) {
             return
         }
-        try {
-            mMediaRecorder?.stop()
-            mMediaRecorder?.release()
-            mMediaRecorder = null
-        } catch (e: RuntimeException) {
-            mMediaRecorder?.reset()
-            mMediaRecorder?.release()
-            mMediaRecorder = null
-        }
+        view.getContext().stopService(Intent(view.getContext(), RecorderService::class.java))
         isRecording = false
     }
 
     fun startRecoder() {
-        if (isRecording){
+        if (isRecording) {
             stopRecoder()
             return
         }
-        if (mMediaRecorder == null){
-            mMediaRecorder = MediaRecorder()
-            mMediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)// 设置麦克风
-            mMediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            mMediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            view.getContext()
+                .startForegroundService(Intent(view.getContext(), RecorderService::class.java))
+        } else {
+            view.getContext().startService(Intent(view.getContext(), RecorderService::class.java))
         }
-        try {
-            val fileName = dateFormat.format(Date()) + ".m4a"
-            val filePath = view.getContext().getExternalFilesDir("")
-            filePath?.mkdirs()
-            mMediaRecorder?.setOutputFile(filePath?.path + fileName)
-            Log.e("MainPresenter",""+filePath?.path + fileName)
-            mMediaRecorder?.prepare()
-            mMediaRecorder?.start()
-            isRecording = true
-        } catch (e: Exception) {
-            Log.e("MainPresenter",""+e.localizedMessage)
-        }
+        isRecording = true
+        startFlash()
+    }
 
+    fun startFlash() {
+        var isFlash = true
+        Timer().schedule(object : TimerTask() {
+            override fun run() {
+                if (isRecording) {
+                    view.flash(isFlash)
+                    isFlash = !isFlash
+                } else {
+                    view.flash(false)
+                    cancel()
+                }
+            }
+        }, 0, 1000)
+    }
+
+    override fun onError(p0: MediaRecorder?, p1: Int, p2: Int) {
+        isRecording = false
+    }
+
+    override fun onInfo(p0: MediaRecorder?, p1: Int, p2: Int) {
 
     }
 
