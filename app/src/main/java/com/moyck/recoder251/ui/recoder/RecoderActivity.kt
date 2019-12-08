@@ -21,11 +21,12 @@ import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 
-class RecoderActivity : BaseActivity(), MCallBack , SeekBar.OnSeekBarChangeListener {
+class RecoderActivity : BaseActivity(), MCallBack, SeekBar.OnSeekBarChangeListener {
     var currentIndex = 0
     private val items = ArrayList<RecoderItem>()
     lateinit var adapter: RecoderAdapter
     lateinit var handler: Handler
+    var currentViewHodler : RecoderAdapter.ViewHodler?=null
     var timer = Timer()
 
     override fun getLayout(): Int {
@@ -43,7 +44,7 @@ class RecoderActivity : BaseActivity(), MCallBack , SeekBar.OnSeekBarChangeListe
             items.add(RecoderItem(file))
         }
         StatusBarUtil.setStatusBarLightMode(window)
-        adapter = RecoderAdapter(items, this, this,this)
+        adapter = RecoderAdapter(items, this, this, this)
         list_view.adapter = adapter
         handler = Handler {
             adapter.notifyDataSetChanged()
@@ -51,7 +52,7 @@ class RecoderActivity : BaseActivity(), MCallBack , SeekBar.OnSeekBarChangeListe
         }
     }
 
-    override fun onClick(position: Int) {
+    override fun onClick(position: Int,viewHodler: RecoderAdapter.ViewHodler) {
         Log.e("onClickonClick", "sss$position")
         if (items[position].isPlaying) {
             MediaPlayerUtil.pause()
@@ -65,6 +66,7 @@ class RecoderActivity : BaseActivity(), MCallBack , SeekBar.OnSeekBarChangeListe
         MediaPlayerUtil.startPlay(items[position].file)
         adapter.notifyDataSetChanged()
         currentIndex = position
+        currentViewHodler = viewHodler
         startSeek()
     }
 
@@ -73,10 +75,19 @@ class RecoderActivity : BaseActivity(), MCallBack , SeekBar.OnSeekBarChangeListe
         timer.schedule(object : TimerTask() {
 
             override fun run() {
-                items[currentIndex].duration =  MediaPlayerUtil.player.duration
-                items[currentIndex].progress = ((MediaPlayerUtil.player.currentPosition.toFloat() / MediaPlayerUtil.player.duration.toFloat()) * 100)
-                handler.sendEmptyMessage(0)
-                Log.e("sdfsdf",""+MediaPlayerUtil.player.duration)
+                currentViewHodler?.seekBar!!.progress =  ((MediaPlayerUtil.player.currentPosition.toFloat() / MediaPlayerUtil.player.duration.toFloat()) * 100).toInt()
+//                items[currentIndex].duration = MediaPlayerUtil.player.duration
+//                items[currentIndex].progress =
+//                    ((MediaPlayerUtil.player.currentPosition.toFloat() / MediaPlayerUtil.player.duration.toFloat()) * 100)
+//                handler.sendEmptyMessage(0)
+//                if (MediaPlayerUtil.player.duration < MediaPlayerUtil.player.currentPosition + 20) {
+//                    items[currentIndex].isPlaying = false
+//                    cancel()
+//                }
+//                Log.e(
+//                    "sdfsdf",
+//                    MediaPlayerUtil.player.currentPosition.toString() + "  " + MediaPlayerUtil.player.duration
+//                )
             }
 
         }, 0, 1000)
@@ -92,7 +103,7 @@ class RecoderActivity : BaseActivity(), MCallBack , SeekBar.OnSeekBarChangeListe
     }
 
     override fun onProgressChanged(p0: SeekBar, p1: Int, p2: Boolean) {
-        if (p2){
+        if (p2) {
             timer.cancel()
         }
     }

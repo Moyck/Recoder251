@@ -91,7 +91,7 @@ class RecoderAdapter(
         }
 
         viewHodler.imgPlay.setOnClickListener {
-            callBack.onClick(p0)
+            callBack.onClick(p0,viewHodler)
         }
 
         return convertView
