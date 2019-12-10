@@ -53,6 +53,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
         et_url.setText(zhihu)
         et_url.setOnEditorActionListener(this)
         presenter.bind(this, MainModel())
+        presenter.startFlash()
     }
 
     override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
@@ -111,7 +112,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
         if (!checkPermission()) {
             return
         }
-        if (presenter.isRecording) {
+        if (presenter.isRecording()) {
             presenter.stopRecoder()
             imgStart?.setColorFilter(Color.TRANSPARENT)
         } else {
@@ -127,6 +128,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
 
     fun show404() {
         re_.visibility = View.VISIBLE
+        re_help.visibility = View.GONE
     }
 
     fun showHelpPage() {
@@ -158,7 +160,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
         view.findViewById<TextView>(R.id.item_tv_help).setOnClickListener(this)
         imgStart = view.findViewById<ImageView>(R.id.img_start)
         imgDownload = view.findViewById<ImageView>(com.moyck.recoder251.R.id.img_download)
-        if (presenter.isRecording) {
+        if (presenter.isRecording()) {
             imgStart?.setColorFilter(Color.GREEN)
         }
         popupWindow = PopupWindow(

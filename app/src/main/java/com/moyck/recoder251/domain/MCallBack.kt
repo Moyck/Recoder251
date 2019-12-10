@@ -9,6 +9,6 @@ import com.moyck.recoder251.adapter.RecoderAdapter
  */
 interface MCallBack {
 
-    fun onClick(position: Int,viewHodler: RecoderAdapter.ViewHodler)
+    fun onClick(position: Int)
 
 }

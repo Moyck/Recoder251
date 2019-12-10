@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="selection">
+        <item>重命名</item>
+        <item>分享</item>
+        <item>删除</item>
+    </string-array>
+
+
+</resources>

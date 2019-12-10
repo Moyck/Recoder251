@@ -5,6 +5,7 @@ import android.media.MediaRecorder
 import android.os.Build
 import android.util.Log
 import com.moyck.recoder251.service.RecorderService
+import com.moyck.recoder251.utils.ServiceUtil
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -16,7 +17,7 @@ class MainPresenter : MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListene
     var dateFormat = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH)
     lateinit var view: MainContract.View
     lateinit var model: MainContract.Model
-    var isRecording = false
+
 
 
     fun bind(view: MainContract.View, model: MainContract.Model) {
@@ -25,15 +26,18 @@ class MainPresenter : MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListene
     }
 
     fun stopRecoder() {
-        if (!isRecording) {
+        if (!isRecording()) {
             return
         }
         view.getContext().stopService(Intent(view.getContext(), RecorderService::class.java))
-        isRecording = false
+    }
+
+    fun isRecording():Boolean{
+        return ServiceUtil.isRunService(view.getContext(),"com.moyck.recoder251.service.RecorderService")
     }
 
     fun startRecoder() {
-        if (isRecording) {
+        if (isRecording()) {
             stopRecoder()
             return
         }
@@ -43,7 +47,6 @@ class MainPresenter : MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListene
         } else {
             view.getContext().startService(Intent(view.getContext(), RecorderService::class.java))
         }
-        isRecording = true
         startFlash()
     }
 
@@ -51,7 +54,7 @@ class MainPresenter : MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListene
         var isFlash = true
         Timer().schedule(object : TimerTask() {
             override fun run() {
-                if (isRecording) {
+                if (isRecording()) {
                     view.flash(isFlash)
                     isFlash = !isFlash
                 } else {
@@ -59,11 +62,11 @@ class MainPresenter : MediaRecorder.OnErrorListener, MediaRecorder.OnInfoListene
                     cancel()
                 }
             }
-        }, 0, 1000)
+        }, 0, 1500)
     }
 
     override fun onError(p0: MediaRecorder?, p1: Int, p2: Int) {
-        isRecording = false
+
     }
 
     override fun onInfo(p0: MediaRecorder?, p1: Int, p2: Int) {
