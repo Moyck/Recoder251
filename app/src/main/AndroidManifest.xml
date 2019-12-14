@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.moyck.recoder251">
-
     <!-- 添加网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 录音 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -11,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".base.MyApplication"
@@ -23,20 +22,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <service
-            android:name=".service.RecorderService"
-            android:enabled="true"
-            android:exported="true"></service>
-
-        <activity android:name=".ui.recoder.RecoderActivity" />
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.RecorderService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".ui.recoder.RecoderActivity" />
+        <activity android:name=".ui.main.MainActivity"/>
     </application>
 
 </manifest>
