@@ -18,22 +18,12 @@ import com.moyck.recoder251.utils.MediaPlayerUtil
 import com.moyck.recoder251.utils.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_recoder.*
 import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
-import com.moyck.recoder251.ui.main.MainActivity
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.input.input
 import com.afollestad.materialdialogs.list.listItems
-import androidx.core.content.FileProvider
-import android.os.Build
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.R
-import com.moyck.recoder251.BuildConfig
 
 
 class RecoderActivity : BaseActivity(), MCallBack, SeekBar.OnSeekBarChangeListener,

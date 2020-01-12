@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Recoder251</string>
+
+    <string name="tip">(doge)</string>
+
+    <string name="select">操作</string>
+    <string name="comfit">Sure</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="rename">Rename</string>
+    <string name="delect">Delete</string>
+    <string name="share">Share</string>
+
+    <string name="no_page">Nothing</string>
+    <string name="recording">Recording</string>
+
+
+    <string name="newtab">New tab</string>
+    <string name="newinco">New incognito tab</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="recenttabs">Recent tabs</string>
+    <string name="history">History</string>
+    <string name="downloads">Downloads</string>
+    <string name="tran">Translate...</string>
+    <string name="shares">Share...</string>
+    <string name="findpage">Find in page</string>
+    <string name="setting">Settings</string>
+    <string name="help">Help &amp; feedback</string>
+
+</resources>
