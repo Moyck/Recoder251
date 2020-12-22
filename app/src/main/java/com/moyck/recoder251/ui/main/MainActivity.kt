@@ -37,7 +37,7 @@ class MainActivity : BaseActivity(), MainContract.View, View.OnClickListener,
     var popupWindow: PopupWindow? = null
     private val presenter = MainPresenter()
     private val mBlog = "http://www.moyck.com:8080/articles/2019/11/29/1575013596580.html"
-    private val zhihu = "https://www.zhihu.com"
+    private val zhihu = "https://www.bing.com"
     var imgStart: ImageView? = null
     var imgDownload: ImageView? = null
 

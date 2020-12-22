@@ -4,6 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+/**
+ * 该App灵感来源于华为251事情，无辜员工被羁留251天，幸好该员工保存了当时录音才得以出狱。
+ * 证据很重要，但是有时当面打开录音软件并不合适。
+ * 因此做了这么一个看似浏览器实际录音机的App，点击菜单的星星开始/暂停录音。点击菜单的下载图标查看录音记录。让你可以在别人无法察觉的时候录音。
+ */
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -11,8 +17,8 @@ android {
         applicationId "com.moyck.recoder251"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.0.1"
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -37,4 +43,9 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:bottomsheets:3.1.1'
     implementation 'com.afollestad.material-dialogs:core:3.1.1'
     implementation 'com.afollestad.material-dialogs:input:3.1.1'
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    def lifecycle_version = "2.0.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 }
